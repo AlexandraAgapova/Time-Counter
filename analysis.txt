@@ -1,0 +1,39 @@
+int main() {
+    Time t;
+    t.SetHours(1);               // Устанавливаем часы в 1 для объекта t
+    Time t2 = t;                  // Создаём t2 через конструктор копирования, который копирует t
+    t.SetHours(2);                // Устанавливаем часы в 2 для объекта t
+    t2.PrintTime();               // Печатаем текущее время t2 (копия t до изменения)
+
+    {
+        t2.SetHours(12);          // Устанавливаем часы в 12 для объекта t2
+        t2.PrintTime();           // Печатаем текущее время t2
+        Time t2(22, 22, 22);      // Создаём новый объект t2 с параметрами (22, 22, 22)
+        t2.PrintTime();           // Печатаем текущее время t2 (новый объект)
+    } // Новый t2 уничтожается здесь
+
+    t2.PrintTime();               // Печатаем текущее время t2 (копия исходного t)
+
+    Time t3(3, 3, 3);             // Создаём объект t3 с параметрами (3, 3, 3)
+    t3 = t;                       // Присваиваем объекту t3 значение объекта t
+    t3.SetHours(3);               // Устанавливаем часы в 3 для объекта t3
+    t3.PrintTime();               // Печатаем текущее время t3
+
+    return 0;
+}
+
+// Вывод:
+// Default constructor called. Current object count: 1
+// Copy constructor called. Current object count: 2
+// 1:0:0
+// 12:0:0
+// Parameterized constructor called. Current object count: 3
+// 22:22:22
+// Destructor called. Current object count: 2
+// 12:0:0
+// Parameterized constructor called. Current object count: 3
+// 3:0:0
+// Destructor called. Current object count: 2
+// Destructor called. Current object count: 1
+// Destructor called. Current object count: 0
+
